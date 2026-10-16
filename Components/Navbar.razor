@@ -1,0 +1,99 @@
+@inject IJSRuntime JSRuntime
+
+<nav class="navbar">
+    <div class="container navbar-content">
+        <a href="#home" class="navbar-brand">BA</a>
+        
+        <ul class="navbar-links">
+            <li><a href="#home" class="nav-link @(ActiveSection == "home" ? "active" : "")">Home</a></li>
+            <li><a href="#about" class="nav-link @(ActiveSection == "about" ? "active" : "")">About</a></li>
+            <li><a href="#skills" class="nav-link @(ActiveSection == "skills" ? "active" : "")">Skills</a></li>
+            <li><a href="#experience" class="nav-link @(ActiveSection == "experience" ? "active" : "")">Experience</a></li>
+            <li><a href="#projects" class="nav-link @(ActiveSection == "projects" ? "active" : "")">Projects</a></li>
+            <li><a href="#education" class="nav-link @(ActiveSection == "education" ? "active" : "")">Education</a></li>
+            <li><a href="#contact" class="nav-link @(ActiveSection == "contact" ? "active" : "")">Contact</a></li>
+        </ul>
+
+        <div class="navbar-actions">
+            <button class="theme-toggle" @onclick="ToggleTheme" aria-label="Toggle theme">
+                @if (isDarkTheme)
+                {
+                    <span>☀️</span>
+                }
+                else
+                {
+                    <span>🌙</span>
+                }
+            </button>
+            <a href="/assets/Basit-Altaf-Resume.pdf" download class="btn btn-outline" title="Download Resume">
+                📄 Resume
+            </a>
+            <a href="#contact" class="btn btn-primary">Let's Talk</a>
+            <button class="mobile-menu-btn" @onclick="ToggleMobileMenu" aria-label="Toggle menu">
+                <span>☰</span>
+            </button>
+        </div>
+    </div>
+
+    @if (isMobileMenuOpen)
+    {
+        <div class="mobile-menu open">
+            <a href="#home" @onclick="CloseMobileMenu">Home</a>
+            <a href="#about" @onclick="CloseMobileMenu">About</a>
+            <a href="#skills" @onclick="CloseMobileMenu">Skills</a>
+            <a href="#experience" @onclick="CloseMobileMenu">Experience</a>
+            <a href="#projects" @onclick="CloseMobileMenu">Projects</a>
+            <a href="#education" @onclick="CloseMobileMenu">Education</a>
+            <a href="#contact" @onclick="CloseMobileMenu">Contact</a>
+        </div>
+    }
+</nav>
+
+@code {
+    private bool isDarkTheme = true;
+    private bool isMobileMenuOpen = false;
+    private string ActiveSection { get; set; } = "home";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var savedTheme = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "theme");
+            if (savedTheme != null)
+            {
+                isDarkTheme = savedTheme == "dark";
+                ApplyTheme();
+                StateHasChanged();
+            }
+        }
+    }
+
+    private void ToggleTheme()
+    {
+        isDarkTheme = !isDarkTheme;
+        ApplyTheme();
+        _ = JSRuntime.InvokeVoidAsync("localStorage.setItem", "theme", isDarkTheme ? "dark" : "light");
+    }
+
+    private void ApplyTheme()
+    {
+        if (isDarkTheme)
+        {
+            _ = JSRuntime.InvokeVoidAsync("eval", "document.documentElement.removeAttribute('data-theme')");
+        }
+        else
+        {
+            _ = JSRuntime.InvokeVoidAsync("eval", "document.documentElement.setAttribute('data-theme', 'light')");
+        }
+    }
+
+    private void ToggleMobileMenu()
+    {
+        isMobileMenuOpen = !isMobileMenuOpen;
+    }
+
+    private void CloseMobileMenu()
+    {
+        isMobileMenuOpen = false;
+    }
+}

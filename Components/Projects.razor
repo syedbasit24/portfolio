@@ -1,0 +1,136 @@
+@using Portfolio.Data
+
+<section id="projects" class="projects">
+    <div class="container">
+        <h2 class="section-title fade-in">Projects Portfolio</h2>
+        <p class="section-subtitle fade-in">A selection of my work and professional contributions</p>
+        
+        <div class="projects-filter fade-in">
+            <button class="filter-btn @(selectedFilter == "All" ? "active" : "")" @onclick="SetAllFilter">All</button>
+            <button class="filter-btn @(selectedFilter == ".NET" ? "active" : "")" @onclick="SetNETFilter">.NET</button>
+            <button class="filter-btn @(selectedFilter == "Full Stack" ? "active" : "")" @onclick="SetFullStackFilter">Full Stack</button>
+            <button class="filter-btn @(selectedFilter == "Data/AI" ? "active" : "")" @onclick="SetDataAIFilter">Data/AI</button>
+        </div>
+        
+        <div class="projects-grid fade-in">
+            @foreach (var project in filteredProjects)
+            {
+                <div class="project-card">
+                    <div class="project-image">
+                        @if (project.IsExperienceBased)
+                        {
+                            <span class="project-experience-badge">Professional Work</span>
+                        }
+                        <span class="project-image-placeholder">💻</span>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">@project.Name</h3>
+                        <p class="project-description">@project.ShortDescription</p>
+                        <div class="project-technologies">
+                            @foreach (var tech in project.Technologies)
+                            {
+                                <span class="badge">@tech</span>
+                            }
+                        </div>
+                        <div class="project-actions">
+                            <button class="btn btn-outline" @onclick="() => OpenProjectDetail(project)">
+                                View Details
+                            </button>
+                            @if (!string.IsNullOrEmpty(project.GitHubUrl))
+                            {
+                                <a href="@project.GitHubUrl" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
+                                    GitHub
+                                </a>
+                            }
+                            @if (!string.IsNullOrEmpty(project.LiveDemoUrl))
+                            {
+                                <a href="@project.LiveDemoUrl" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                                    Live Demo
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+@if (selectedProject != null)
+{
+    <div class="modal open" @onclick="CloseProjectDetail">
+        <div class="modal-content" @onclick:stopPropagation>
+            <button class="modal-close" @onclick="CloseProjectDetail">&times;</button>
+            <h2 style="font-size: 2rem; margin-bottom: 1rem; color: var(--text-primary);">@selectedProject.Name</h2>
+            @if (selectedProject.IsExperienceBased)
+            {
+                <p style="color: var(--accent-secondary); font-weight: 600; margin-bottom: 1rem;">
+                    Professional Work Experience
+                </p>
+            }
+            <p style="line-height: 1.8; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                @selectedProject.FullDescription
+            </p>
+            <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--text-primary);">Technologies Used</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;">
+                @foreach (var tech in selectedProject.Technologies)
+                {
+                    <span class="badge">@tech</span>
+                }
+            </div>
+            <div style="display: flex; gap: 1rem;">
+                @if (!string.IsNullOrEmpty(selectedProject.GitHubUrl))
+                {
+                    <a href="@selectedProject.GitHubUrl" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                        View on GitHub
+                    </a>
+                }
+                @if (!string.IsNullOrEmpty(selectedProject.LiveDemoUrl))
+                {
+                    <a href="@selectedProject.LiveDemoUrl" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+                        View Live Demo
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private string selectedFilter = "All";
+    private Project? selectedProject = null;
+    
+    private List<Project> filteredProjects => selectedFilter == "All" 
+        ? ProjectsData.Items 
+        : ProjectsData.Items.Where(p => p.Category == selectedFilter).ToList();
+    
+    private void SetAllFilter()
+    {
+        selectedFilter = "All";
+    }
+    
+    private void SetNETFilter()
+    {
+        selectedFilter = ".NET";
+    }
+    
+    private void SetFullStackFilter()
+    {
+        selectedFilter = "Full Stack";
+    }
+    
+    private void SetDataAIFilter()
+    {
+        selectedFilter = "Data/AI";
+    }
+    
+    private void OpenProjectDetail(Project project)
+    {
+        selectedProject = project;
+    }
+    
+    private void CloseProjectDetail()
+    {
+        selectedProject = null;
+    }
+}

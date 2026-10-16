@@ -1,0 +1,42 @@
+﻿@page "/"
+@using Portfolio.Components
+
+<PageTitle>Basit Altaf | .NET Full-Stack Developer</PageTitle>
+
+<Navbar />
+<Hero />
+<About />
+<Skills />
+<Experience />
+<Projects />
+<Education />
+<Certifications />
+<SoftSkills />
+<Contact />
+<Footer />
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Initialize scroll animations
+            await JSRuntime.InvokeVoidAsync("eval", @"
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, { threshold: 0.1 });
+                
+                document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
+                    observer.observe(el);
+                });
+            ");
+        }
+    }
+
+    [Inject]
+    private IJSRuntime JSRuntime { get; set; } = null!;
+}

@@ -1,0 +1,27 @@
+@using Portfolio.Data
+
+<section id="certifications" class="certifications">
+    <div class="container">
+        <h2 class="section-title fade-in">Certifications & Training</h2>
+        <p class="section-subtitle fade-in">Professional development and learning</p>
+        
+        <div class="certifications-grid fade-in">
+            @foreach (var cert in CertificationsData.Items)
+            {
+                <div class="certification-card">
+                    <div class="certification-icon">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 0.25rem; color: var(--text-primary);">@cert.Name</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">@cert.Issuer</p>
+                        <p style="color: var(--text-muted); font-size: 0.85rem;">@cert.Date</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

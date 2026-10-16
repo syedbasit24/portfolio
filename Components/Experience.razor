@@ -1,0 +1,25 @@
+@using Portfolio.Data
+
+<section id="experience" class="experience">
+    <div class="container">
+        <h2 class="section-title fade-in">Professional Experience</h2>
+        <p class="section-subtitle fade-in">My journey in software development</p>
+        
+        <div class="experience-timeline fade-in">
+            @foreach (var exp in ExperienceData.Items)
+            {
+                <div class="experience-item">
+                    <h3 class="experience-company">@exp.Company</h3>
+                    <p class="experience-role">@exp.Role</p>
+                    <p class="experience-duration">@exp.Duration</p>
+                    <ul class="experience-responsibilities">
+                        @foreach (var responsibility in exp.Responsibilities)
+                        {
+                            <li>@responsibility</li>
+                        }
+                    </ul>
+                </div>
+            }
+        </div>
+    </div>
+</section>

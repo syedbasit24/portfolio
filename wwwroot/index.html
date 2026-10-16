@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basit Altaf | .NET Full-Stack Developer</title>
+    <meta name="description" content="Basit Altaf - Software Developer and .NET Full-Stack Developer with 4+ years of experience in ASP.NET Core, C#, SQL Server, and full-stack web development." />
+    <meta name="keywords" content="Basit Altaf, .NET Developer, Full-Stack Developer, ASP.NET Core, C#, SQL Server, Software Developer" />
+    <meta name="author" content="Basit Altaf" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Basit Altaf | .NET Full-Stack Developer" />
+    <meta property="og:description" content="Software Developer and .NET Full-Stack Developer with 4+ years of experience in ASP.NET Core, C#, SQL Server, and full-stack web development." />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="Basit Altaf | .NET Full-Stack Developer" />
+    <meta property="twitter:description" content="Software Developer and .NET Full-Stack Developer with 4+ years of experience in ASP.NET Core, C#, SQL Server, and full-stack web development." />
+    
+    <base href="/" />
+    <link rel="stylesheet" href="styles/site.css" />
+    <link href="Portfolio.styles.css" rel="stylesheet" />
+    
+    <!-- Favicon placeholder -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>BA</text></svg>" />
+</head>
+
+<body>
+    <div id="app">
+        <svg class="loading-progress">
+            <circle r="40%" cx="50%" cy="50%" />
+            <circle r="40%" cx="50%" cy="50%" />
+        </svg>
+        <div class="loading-progress-text"></div>
+    </div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="." class="reload">Reload</a>
+        <span class="dismiss">🗙</span>
+    </div>
+    
+    <!-- Formspree integration script -->
+    <script>
+        window.sendFormspree = async function(formId, data) {
+            try {
+                const response = await fetch(`https://formspree.io/f/${formId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (response.ok) {
+                    return true;
+                } else {
+                    console.error('Formspree error:', response.status, response.statusText);
+                    return false;
+                }
+            } catch (error) {
+                console.error('Formspree fetch error:', error);
+                return false;
+            }
+        };
+    </script>
+    
+    <script src="_framework/blazor.webassembly.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+@using Portfolio.Data
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Basit Altaf</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">.NET Full-Stack Developer</p>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">
+                    Building reliable software solutions with modern .NET technologies.
+                </p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <ul class="footer-links">
+                    <li>
+                        <a href="mailto:@profileData.Email">@profileData.Email</a>
+                    </li>
+                    <li>
+                        <a href="@profileData.LinkedIn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    </li>
+                    <li>
+                        <a href="tel:@profileData.Phone">@profileData.Phone</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p class="footer-copyright">
+                © @DateTime.Now.Year Basit Altaf. All rights reserved.
+            </p>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">
+                Built with ASP.NET Core Blazor
+            </p>
+            <a href="#home" class="footer-back-to-top">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+                Back to Top
+            </a>
+        </div>
+    </div>
+</footer>
+
+@code {
+    private ProfileData profileData = new();
+}

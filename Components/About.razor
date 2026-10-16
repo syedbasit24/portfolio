@@ -1,0 +1,46 @@
+@using Portfolio.Data
+
+<section id="about" class="about">
+    <div class="container">
+        <h2 class="section-title fade-in">About Me</h2>
+        <p class="section-subtitle fade-in">Passionate about building reliable software solutions</p>
+        
+        <div class="card fade-in">
+            <p style="line-height: 1.8; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                @profileData.Summary
+            </p>
+            
+            <p style="line-height: 1.8; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                I enjoy solving complex technical problems, building maintainable applications, improving existing systems, and continuously learning modern development technologies. My approach to development emphasizes clean code, thorough testing, and collaborative problem-solving.
+            </p>
+            
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-primary);">What I Do</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <div class="card" style="margin-bottom: 0;">
+                    <h4 style="color: var(--accent-primary); margin-bottom: 0.5rem;">Full-Stack Development</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Building end-to-end web applications with .NET technologies</p>
+                </div>
+                
+                <div class="card" style="margin-bottom: 0;">
+                    <h4 style="color: var(--accent-primary); margin-bottom: 0.5rem;">Database Design</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Creating efficient SQL Server databases and stored procedures</p>
+                </div>
+                
+                <div class="card" style="margin-bottom: 0;">
+                    <h4 style="color: var(--accent-primary); margin-bottom: 0.5rem;">API Development</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Designing and implementing RESTful APIs and data access layers</p>
+                </div>
+                
+                <div class="card" style="margin-bottom: 0;">
+                    <h4 style="color: var(--accent-primary); margin-bottom: 0.5rem;">Problem Solving</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Debugging production issues and optimizing application performance</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@code {
+    private ProfileData profileData = new();
+}

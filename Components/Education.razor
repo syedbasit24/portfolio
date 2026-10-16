@@ -1,0 +1,26 @@
+@using Portfolio.Data
+
+<section id="education" class="education">
+    <div class="container">
+        <h2 class="section-title fade-in">Education</h2>
+        <p class="section-subtitle fade-in">My academic background</p>
+        
+        @foreach (var edu in EducationData.Items)
+        {
+            <div class="education-card fade-in">
+                <div class="education-icon">
+                    <svg class="icon" viewBox="0 0 24 24" style="color: white;">
+                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                        <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                    </svg>
+                </div>
+                <div class="education-details">
+                    <h3>@edu.Degree</h3>
+                    <p style="color: var(--accent-primary); font-weight: 600;">@edu.Field</p>
+                    <p>@edu.Institution</p>
+                    <p style="color: var(--text-muted);">@edu.Year</p>
+                </div>
+            </div>
+        }
+    </div>
+</section>
