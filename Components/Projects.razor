@@ -107,30 +107,36 @@
     private void SetAllFilter()
     {
         selectedFilter = "All";
+        StateHasChanged();
     }
     
     private void SetNETFilter()
     {
         selectedFilter = ".NET";
+        StateHasChanged();
     }
     
     private void SetFullStackFilter()
     {
         selectedFilter = "Full Stack";
+        StateHasChanged();
     }
     
     private void SetDataAIFilter()
     {
         selectedFilter = "Data/AI";
+        StateHasChanged();
     }
     
     private void OpenProjectDetail(Project project)
     {
         selectedProject = project;
+        StateHasChanged();
     }
     
     private void CloseProjectDetail()
     {
         selectedProject = null;
+        StateHasChanged();
     }
 }
